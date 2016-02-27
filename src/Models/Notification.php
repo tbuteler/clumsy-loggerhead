@@ -41,6 +41,21 @@ class Notification extends Eloquent
         return $this->activity->meta();
     }
 
+    public function scopeReadStatus($query, $read = true)
+    {
+        $query->where('clumsy_notification_associations.read', $read);
+    }
+
+    public function scopeRead($query)
+    {
+        $query->readStatus(true);
+    }
+
+    public function scopeUnread($query)
+    {
+        $query->readStatus(false);
+    }
+
     public function shouldTrigger()
     {
         return Carbon::now()->diffInSeconds($this->visible_from, false) <= 0;

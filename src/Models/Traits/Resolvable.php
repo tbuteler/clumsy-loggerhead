@@ -51,11 +51,6 @@ trait Resolvable
 
     public function __toString()
     {
-        try {
-            return $this->content;
-        } catch (\Exception $e) {
-            dd($e);
-        }
-
+        return $this->content;
     }
 }

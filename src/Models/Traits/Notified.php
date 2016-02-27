@@ -29,12 +29,12 @@ trait Notified
 
     public function readNotifications()
     {
-        return $this->notifications()->where('clumsy_notification_associations.read', true)->get();
+        return $this->notifications()->read()->get();
     }
 
     public function unreadNotifications()
     {
-        return $this->notifications()->where('clumsy_notification_associations.read', false)->get();
+        return $this->notifications()->unread()->get();
     }
 
     public function notificationMailRecipients(Notification $notification)

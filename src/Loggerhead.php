@@ -89,6 +89,11 @@ class Loggerhead
         return $this->defaultTitle ? $this->defaultTitle : trans('clumsy/loggerhead::content.default-title');
     }
 
+    public function getItemCategory($item)
+    {
+        return get_class($item) === Activity::class ? 'activity' : 'notification';
+    }
+
     public function setResolver($type, $category, $slug, Closure $callback)
     {
         array_set($this->resolvers, "{$type}.{$category}.{$slug}", $callback);
@@ -132,7 +137,7 @@ class Loggerhead
 
     public function getResolver($type, $item)
     {
-        $category = get_class($item) === Activity::class ? 'activity' : 'notification';
+        $category = $this->getItemCategory($item);
 
         $resolver = array_get($this->resolvers, "{$type}.{$category}.{$item->slug}");
 
@@ -149,6 +154,31 @@ class Loggerhead
         return $this->getResolver($type, $item) instanceof Closure;
     }
 
+    public function getView($item)
+    {
+        $category = $this->getItemCategory($item);
+
+        $possibleViews = [
+            "clumsy/loggerhead::{$category}.{$item->slug}",
+            "clumsy/loggerhead::activity.{$item->slug}",
+            "clumsy/loggerhead::{$category}",
+            "clumsy/loggerhead::activity",
+        ];
+
+        foreach ($possibleViews as $viewSlug) {
+            if (view()->exists($viewSlug)) {
+                return view($viewSlug)->with($item->meta_attributes);
+            }
+        }
+
+        return null;
+    }
+
+    public function hasView($item)
+    {
+        return !is_null($this->getView($item));
+    }
+
     public function resolveTitle($item)
     {
         $callback = $this->hasResolver('title', $item)
@@ -161,10 +191,10 @@ class Loggerhead
     public function resolve(&$item)
     {
         if ($this->hasResolver('content', $item)) {
-
             $callback = $this->getResolver('content', $item);
             $item->content = $callback($item);
-
+        } elseif ($this->hasView($item)) {
+            $item->content = $this->getView($item)->render();
         } else {
             $item->content = trans("clumsy/loggerhead::content.{$item->slug}", $item->meta_attributes);
         }
