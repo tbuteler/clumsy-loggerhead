@@ -2,7 +2,7 @@
 
 namespace Clumsy\Loggerhead\Contracts;
 
-interface Notified
+interface NotifiedContract
 {
     public function notifier();
 

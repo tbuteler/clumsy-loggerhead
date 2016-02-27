@@ -2,7 +2,7 @@
 
 namespace Clumsy\Loggerhead\Controllers;
 
-use Clumsy\Loggerhead\Contracts\Notified;
+use Clumsy\Loggerhead\Contracts\NotifiedContract;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Crypt;
 
@@ -14,17 +14,17 @@ class LoggerheadController extends Controller
         return with(new $associationModel)->find($associationId);
     }
 
-    protected function markAllNotificationsAsRead(Notified $association)
+    protected function markAllNotificationsAsRead(NotifiedContract $association)
     {
         $association->markAllNotificationsAsRead();
     }
 
-    protected function markNotificationAsRead(Notified $association, $notificationId)
+    protected function markNotificationAsRead(NotifiedContract $association, $notificationId)
     {
         $association->markNotificationAsRead($notificationId);
     }
 
-    protected function markNotificationAsUnread(Notified $association, $notificationId)
+    protected function markNotificationAsUnread(NotifiedContract $association, $notificationId)
     {
         $association->markNotificationAsUnread($notificationId);
     }
