@@ -1,0 +1,27 @@
+{
+    "name": "clumsy/loggerhead",
+    "description": "Activity log and notifications for Laravel",
+    "keywords": ["laravel", "cms", "activity", "activity log", "notifications"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tomas Buteler",
+            "email": "tbuteler@gmail.com"
+        }
+    ],
+    "require": {
+        "laravel/framework": ">=5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Clumsy\\Loggerhead\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.4.0-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
