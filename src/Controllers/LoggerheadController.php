@@ -31,7 +31,7 @@ class LoggerheadController extends Controller
 
     public function readNotification()
     {
-        if (request()->has('all_notifications') && request(('all_notifications')) {
+        if (request()->has('all_notifications') && request('all_notifications')) {
             $this->markAllNotificationsAsRead($this->getModelFromRequest());
         } else {
             $this->markNotificationAsRead($this->getModelFromRequest(), request('notification_id'));

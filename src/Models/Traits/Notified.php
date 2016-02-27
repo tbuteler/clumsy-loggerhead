@@ -44,7 +44,7 @@ trait Notified
 
     public function updateReadStatus($read = true, $notificationId = false)
     {
-        $query = DB::table(app('clumsy.loggerhead')->notificationAssociationsTable());
+        $query = DB::table('clumsy_notification_associations');
 
         if ($notificationId) {
             $query->where('notification_id', $notificationId);
