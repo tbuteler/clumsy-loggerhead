@@ -3,12 +3,8 @@
 namespace Clumsy\Loggerhead;
 
 use Closure;
-use InvalidArgumentException;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Support\Arrayable;
 use Clumsy\Loggerhead\Models\Activity;
-use Clumsy\Loggerhead\Models\Notification;
 use Clumsy\Loggerhead\Models\ActivityMeta;
 use Clumsy\Loggerhead\Notifier;
 use Carbon\Carbon;

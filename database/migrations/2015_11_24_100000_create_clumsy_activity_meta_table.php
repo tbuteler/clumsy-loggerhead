@@ -31,7 +31,7 @@ class CreateClumsyActivityMetaTable extends Migration
      */
     public function down()
     {
-        Schema::table('clumsy_activity_meta', function ($table) {
+        Schema::table('clumsy_activity_meta', function (Blueprint $table) {
             $table->dropForeign('clumsy_activity_meta_activity_id_foreign');
         });
 

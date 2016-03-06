@@ -2,11 +2,9 @@
 
 namespace Clumsy\Loggerhead;
 
-use Illuminate\Support\Collection;
-use Clumsy\Loggerhead\Models\Activity;
 use Clumsy\Loggerhead\Models\Notification;
-use Clumsy\Loggerhead\Models\NotificationMeta;
-use Carbon\Carbon;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class Notifier
 {

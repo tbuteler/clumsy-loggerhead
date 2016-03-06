@@ -33,7 +33,7 @@ class CreateClumsyNotificationAssociationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('clumsy_notification_associations', function ($table) {
+        Schema::table('clumsy_notification_associations', function (Blueprint $table) {
             $table->dropForeign('clumsy_notification_associations_notification_id_foreign');
         });
 

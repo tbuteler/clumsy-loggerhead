@@ -4,9 +4,8 @@ namespace Clumsy\Loggerhead\Console;
 
 use Carbon\Carbon;
 use Clumsy\Loggerhead\Models\Notification;
-use Illuminate\Foundation\AssetPublisher;
+use Illuminate\Support\Collection;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -31,13 +30,6 @@ class TriggerPendingNotificationsCommand extends Command
     protected $description = 'Check for notifications not yet triggered and trigger them';
 
     /**
-     * The asset publisher instance.
-     *
-     * @var \Illuminate\Foundation\AssetPublisher
-     */
-    protected $assets;
-
-    /**
      * Execute the console command.
      *
      * @return void
@@ -59,7 +51,7 @@ class TriggerPendingNotificationsCommand extends Command
                     ->join('clumsy_notification_associations', 'clumsy_notifications.id', '=', 'clumsy_notification_associations.notification_id')
                     ->where('triggered', false)
                     ->where('visible_from', '<=', Carbon::now()->toDateTimeString())
-                    ->chunk(200, function ($notifications) {
+                    ->chunk(200, function (Collection $notifications) {
 
                         foreach ($notifications as $notification) {
                             $model = $notification->notification_association_type;
