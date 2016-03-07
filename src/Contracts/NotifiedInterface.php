@@ -4,7 +4,7 @@ namespace Clumsy\Loggerhead\Contracts;
 
 use Clumsy\Loggerhead\Models\Notification;
 
-interface NotifiedContract
+interface NotifiedInterface
 {
     public function notifier();
 
