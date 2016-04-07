@@ -31,6 +31,10 @@ class CreateClumsyNotificationsTable extends Migration
      */
     public function down()
     {
+        Schema::table('clumsy_notifications', function ($table) {
+            $table->dropForeign('clumsy_notifications_activity_id_foreign');
+        });
+
         Schema::drop('clumsy_notifications');
     }
 }
