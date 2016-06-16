@@ -86,7 +86,7 @@ trait Notified
         $recipients = (array)$this->notificationMailRecipients($notification);
 
         if (count(array_filter($recipients))) {
-            $notification->mail($recipients);
+            $notification->mail(array_filter($recipients));
         }
     }
 
